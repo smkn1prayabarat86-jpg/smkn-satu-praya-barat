@@ -102,6 +102,7 @@
   <a href="#jurusan">Jurusan</a>
   <a href="#guru">Guru & TU</a>
   <a href="#ppdb">PPDB</a>
+   <a href="#eraport">ERAPORT</a>
   <a href="#kontak">Kontak</a>
 </nav>
 
@@ -133,6 +134,52 @@
     </div>
   </div>
 </div>
+
+<div class="container" id="eraport">
+  <div class="hero">
+    <h2>E-Raport Online</h2>
+    <p>Input Nilai Raport Peserta Didik</p>
+  </div>
+
+  <div class="eraport-box">
+    <h3>Identitas Siswa</h3>
+    <input type="text" id="nama" placeholder="Nama Siswa">
+    <input type="text" id="kelas" placeholder="Kelas">
+    <input type="text" id="jurusan" placeholder="Jurusan">
+
+    <h3>Nilai Mata Pelajaran</h3>
+
+    <table>
+      <tr>
+        <th>Mata Pelajaran</th>
+        <th>Nilai</th>
+      </tr>
+      <tr>
+        <td>Bahasa Indonesia</td>
+        <td><input type="number" id="n1"></td>
+      </tr>
+      <tr>
+        <td>PPKn</td>
+        <td><input type="number" id="n2"></td>
+      </tr>
+      <tr>
+        <td>Matematika</td>
+        <td><input type="number" id="n3"></td>
+      </tr>
+      <tr>
+        <td>Produktif Kejuruan</td>
+        <td><input type="number" id="n4"></td>
+      </tr>
+    </table>
+
+    <br>
+    <button onclick="hitung()">Proses Raport</button>
+    <button onclick="window.print()">Cetak</button>
+
+    <div id="hasil"></div>
+  </div>
+</div>
+  
 
 <!-- PPDB -->
 <div class="container" id="ppdb">
@@ -173,9 +220,34 @@
 <footer id="kontak">
   <p>© 2026 SMK Negeri 1 Praya Barat | Website Sekolah</p>
 </footer>
+<script>
+function hitung() {
+  let n1 = Number(document.getElementById("n1").value);
+  let n2 = Number(document.getElementById("n2").value);
+  let n3 = Number(document.getElementById("n3").value);
+  let n4 = Number(document.getElementById("n4").value);
 
+  let rata = (n1 + n2 + n3 + n4) / 4;
+
+  let predikat = "D";
+  if (rata >= 90) predikat = "A";
+  else if (rata >= 80) predikat = "B";
+  else if (rata >= 70) predikat = "C";
+
+  document.getElementById("hasil").innerHTML = `
+    <h3>Hasil Raport</h3>
+    <p><strong>Nama:</strong> ${nama.value}</p>
+    <p><strong>Kelas:</strong> ${kelas.value}</p>
+    <p><strong>Jurusan:</strong> ${jurusan.value}</p>
+    <p><strong>Rata-rata:</strong> ${rata.toFixed(2)}</p>
+    <p><strong>Predikat:</strong> ${predikat}</p>
+  `;
+}
+</script>
+  
 </body>
 </html>
+
 
 
 
