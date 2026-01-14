@@ -13,9 +13,7 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: #f5f7fa;
@@ -28,14 +26,6 @@
       padding: 20px;
     }
 
-    header h1 {
-      font-size: 24px;
-    }
-
-    header p {
-      font-size: 14px;
-    }
-
     nav {
       background: #084298;
       display: flex;
@@ -46,16 +36,11 @@
       color: white;
       padding: 12px 16px;
       text-decoration: none;
-      font-size: 14px;
     }
 
-    nav a:hover {
-      background: #0d6efd;
-    }
+    nav a:hover { background: #0d6efd; }
 
-    .container {
-      padding: 20px;
-    }
+    .container { padding: 20px; }
 
     .hero {
       background: white;
@@ -64,17 +49,42 @@
       margin-bottom: 20px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
     .card {
       background: white;
       padding: 20px;
       border-radius: 8px;
+      margin-bottom: 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #0b5ed7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
     }
 
     footer {
@@ -83,7 +93,6 @@
       text-align: center;
       padding: 15px;
       margin-top: 30px;
-      font-size: 14px;
     }
   </style>
 </head>
@@ -92,179 +101,132 @@
 
 <header>
   <h1>SMK Negeri 1 Praya Barat</h1>
-  <p>Sekolah Menengah Kejuruan – Kabupaten Lombok Tengah</p>
+  <p>Sekolah Menengah Kejuruan – Lombok Tengah</p>
 </header>
 
-<!-- MENU -->
 <nav>
   <a href="#beranda">Beranda</a>
-  <a href="#profil">Profil Sekolah</a>
+  <a href="#profil">Profil</a>
   <a href="#jurusan">Jurusan</a>
   <a href="#guru">Guru & TU</a>
   <a href="#ppdb">PPDB</a>
-   <a href="#eraport">ERAPORT</a>
+  <a href="#eraport">ERAPORT</a>
   <a href="#kontak">Kontak</a>
 </nav>
 
 <!-- BERANDA -->
-<div class="container" id="beranda">
+<section id="beranda" class="container">
   <div class="hero">
-    <h2>Selamat Datang di Website Resmi</h2>
-    <p>SMK Negeri 1 Praya Barat berkomitmen mencetak lulusan yang kompeten, berkarakter, dan siap kerja.</p>
+    <h2>Selamat Datang</h2>
+    <p>Website resmi SMK Negeri 1 Praya Barat.</p>
   </div>
+</section>
 
-  <div class="card" id="profil">
-  <h3>Profil Sekolah</h3>
-  <p><strong>SMK Negeri 1 Praya Barat</strong> SMK Negeri 1 Praya Barat merupakan satuan pendidikan menengah kejuruan yang berada di wilayah Kabupaten Lombok Tengah, Provinsi Nusa Tenggara Barat. </p>
-</div>
-  
-    <div class="card" id="jurusan">
-      <h3>Kompetensi Keahlian</h3>
-      <p>Daftar jurusan dan program keahlian yang tersedia di sekolah.</p>
-    </div>
-
-    <div class="card" id="guru">
-      <h3>Guru & Tata Usaha</h3>
-      <p>Data tenaga pendidik dan kependidikan.</p>
-    </div>
-
-    <div class="card">
-      <h3>Informasi & Pengumuman</h3>
-      <p>Berita terbaru, agenda sekolah, dan pengumuman penting.</p>
-    </div>
+<!-- PROFIL -->
+<section id="profil" class="container">
+  <div class="card">
+    <h3>Profil Sekolah</h3>
+    <p>
+      SMK Negeri 1 Praya Barat adalah sekolah kejuruan yang berkomitmen
+      mencetak lulusan siap kerja dan berkarakter.
+    </p>
   </div>
-</div>
+</section>
+
+<!-- JURUSAN -->
+<section id="jurusan" class="container">
+  <div class="card">
+    <h3>Kompetensi Keahlian</h3>
+    <ul>
+      <li>Desain Komunikasi Visual</li>
+      <li>Usaha Layanan Wisata</li>
+      <li>Perhotelan</li>
+      <li>Tata Boga</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GURU -->
+<section id="guru" class="container">
+  <div class="card">
+    <h3>Guru & Tata Usaha</h3>
+    <p>Data pendidik dan tenaga kependidikan.</p>
+  </div>
+</section>
 
 <!-- PPDB -->
-<div class="container" id="ppdb">
+<section id="ppdb" class="container">
   <div class="hero">
     <h2>PPDB Online</h2>
-    <p>Penerimaan Peserta Didik Baru SMK Negeri 1 Praya Barat</p>
+    <p>Penerimaan Peserta Didik Baru</p>
   </div>
 
   <div class="card">
-    <h3>Formulir Pendaftaran PPDB</h3>
-    <form>
-      <label>Nama Lengkap</label><br />
-      <input type="text" style="width:100%; padding:8px; margin-bottom:10px;" />
+    <label>Nama Lengkap</label>
+    <input type="text">
 
-      <label>NISN</label><br />
-      <input type="text" style="width:100%; padding:8px; margin-bottom:10px;" />
+    <label>NISN</label>
+    <input type="text">
 
-      <label>Asal Sekolah</label><br />
-      <input type="text" style="width:100%; padding:8px; margin-bottom:10px;" />
+    <label>Asal Sekolah</label>
+    <input type="text">
 
-      <label>Pilihan Jurusan</label><br />
-      <select style="width:100%; padding:8px; margin-bottom:10px;">
-        <option>Pilih Jurusan</option>
-        <option>DESAIN KOMUNIKASI VISUAL</option>
-        <option>USAHA LAYANAN WISATA</option>
-        <option>PERHOTELAN</option>
-        <option>TATA BOGA</option>
-      </select>
+    <label>Pilihan Jurusan</label>
+    <select>
+      <option>Pilih Jurusan</option>
+      <option>DKV</option>
+      <option>ULW</option>
+      <option>Perhotelan</option>
+      <option>Tata Boga</option>
+    </select>
 
-      <button type="submit" style="padding:10px 20px; background:#0b5ed7; color:white; border:none; border-radius:5px;">
-        Daftar
-      </button>
-    </form>
+    <button>Daftar</button>
   </div>
-</div>
+</section>
 
 <!-- ERAPORT -->
-<div class="container" id="eraport">
+<section id="eraport" class="container">
   <div class="hero">
-    <h2>E-Raport Online</h2>
-    <p>Input Nilai Raport Peserta Didik</p>
+    <h2>E-Raport</h2>
+    <p>Input dan Cetak Nilai</p>
   </div>
 
-  <div class="eraport-box">
-    ...
-  </div>
-</div>
-
-<div class="container" id="eraport">
-  <div class="hero">
-    <h2>E-Raport Online</h2>
-    <p>Input Nilai Raport Peserta Didik</p>
-  </div>
-
-  <div class="eraport-box">
-    <h3>Identitas Siswa</h3>
-    <input type="text" id="nama" placeholder="Nama Siswa">
-    <input type="text" id="kelas" placeholder="Kelas">
-    <input type="text" id="jurusan" placeholder="Jurusan">
-
-    <h3>Nilai Mata Pelajaran</h3>
+  <div class="card">
+    <input id="nama" placeholder="Nama Siswa">
+    <input id="kelas" placeholder="Kelas">
+    <input id="jurusanSiswa" placeholder="Jurusan">
 
     <table>
-      <tr>
-        <th>Mata Pelajaran</th>
-        <th>Nilai</th>
-      </tr>
-      <tr>
-        <td>Bahasa Indonesia</td>
-        <td><input type="number" id="n1"></td>
-      </tr>
-      <tr>
-        <td>PPKn</td>
-        <td><input type="number" id="n2"></td>
-      </tr>
-      <tr>
-        <td>Matematika</td>
-        <td><input type="number" id="n3"></td>
-      </tr>
-      <tr>
-        <td>Produktif Kejuruan</td>
-        <td><input type="number" id="n4"></td>
-      </tr>
+      <tr><th>Mata Pelajaran</th><th>Nilai</th></tr>
+      <tr><td>Bahasa Indonesia</td><td><input id="n1" type="number"></td></tr>
+      <tr><td>PPKn</td><td><input id="n2" type="number"></td></tr>
+      <tr><td>Matematika</td><td><input id="n3" type="number"></td></tr>
+      <tr><td>Produktif</td><td><input id="n4" type="number"></td></tr>
     </table>
 
-    <br>
-    <button onclick="hitung()">Proses Raport</button>
+    <button onclick="hitung()">Proses</button>
     <button onclick="window.print()">Cetak</button>
 
     <div id="hasil"></div>
   </div>
-</div>
-  
+</section>
 
-<!-- KONTAK -->
 <footer id="kontak">
-  <p>© 2026 SMK Negeri 1 Praya Barat | Website Sekolah</p>
+  <p>© 2026 SMK Negeri 1 Praya Barat</p>
 </footer>
+
 <script>
-  
 function hitung() {
-  let n1 = Number(document.getElementById("n1").value);
+  let n1 = Number(n1 = document.getElementById("n1").value);
   let n2 = Number(document.getElementById("n2").value);
   let n3 = Number(document.getElementById("n3").value);
   let n4 = Number(document.getElementById("n4").value);
-
   let rata = (n1 + n2 + n3 + n4) / 4;
 
-  let predikat = "D";
-  if (rata >= 90) predikat = "A";
-  else if (rata >= 80) predikat = "B";
-  else if (rata >= 70) predikat = "C";
-
-  document.getElementById("hasil").innerHTML = `
-    <h3>Hasil Raport</h3>
-    <p><strong>Nama:</strong> ${nama.value}</p>
-    <p><strong>Kelas:</strong> ${kelas.value}</p>
-    <p><strong>Jurusan:</strong> ${jurusan.value}</p>
-    <p><strong>Rata-rata:</strong> ${rata.toFixed(2)}</p>
-    <p><strong>Predikat:</strong> ${predikat}</p>
-  `;
+  document.getElementById("hasil").innerHTML =
+    "<p>Rata-rata: <b>" + rata.toFixed(2) + "</b></p>";
 }
 </script>
-  
+
 </body>
 </html>
-
-
-
-
-
-
-
-
