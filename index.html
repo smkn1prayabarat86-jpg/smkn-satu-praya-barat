@@ -215,6 +215,28 @@
   © 2026 SMK Negeri 1 Praya Barat
 </footer>
 
+  <script>
+function daftarPPDB(e) {
+  e.preventDefault(); // INI YANG MENCEGAH PINDAH KE BERANDA
+
+  let nama = document.getElementById("ppdb_nama").value;
+  let nisn = document.getElementById("ppdb_nisn").value;
+  let asal = document.getElementById("ppdb_asal").value;
+  let jurusan = document.getElementById("ppdb_jurusan").value;
+
+  document.getElementById("ppdb_hasil").innerHTML = `
+    <hr>
+    <p><b>Pendaftaran Berhasil!</b></p>
+    <p>Nama: ${nama}</p>
+    <p>NISN: ${nisn}</p>
+    <p>Asal Sekolah: ${asal}</p>
+    <p>Jurusan: ${jurusan}</p>
+  `;
+}
+</script>
+</body>
+</html>
+
 <script>
 function showMenu(id) {
   document.querySelectorAll("section").forEach(sec => {
@@ -238,4 +260,5 @@ function hitung() {
 
 </body>
 </html>
+
 
