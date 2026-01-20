@@ -102,12 +102,6 @@ section.active{display:block}
 <div id="ppdb_hasil"></div>
 </div>
 
-<!-- PANEL USER -->
-<div id="userPanel" class="card" style="display:none">
-<h3>Panel Peserta</h3>
-<button onclick="lihatData()">Lihat Data</button>
-</div>
-
 <!-- LOGIN ADMIN -->
 <div class="card">
 <h3>Login Admin</h3>
@@ -117,11 +111,13 @@ section.active{display:block}
 <p id="login_info"></p>
 </div>
 
-<!-- PANEL ADMIN -->
+<!-- PANEL ADMIN (SEMBUNYI SEBELUM LOGIN) -->
 <div id="adminPanel" class="admin" style="display:none">
 <h3>Panel Admin</h3>
+<button onclick="lihatData()">Lihat Data</button>
 <button onclick="editData()">Edit Data</button>
 <button onclick="hapusData()">Hapus Data</button>
+<button onclick="cetakData()">Cetak Bukti</button>
 </div>
 
 </section>
@@ -142,14 +138,15 @@ section.active{display:block}
 <footer>© 2026 SMKN 1 Praya Barat</footer>
 
 <script>
-let dataPPDB={}
-let isAdmin=false
+let dataPPDB = {}
+let isAdmin = false
 
 function showMenu(id){
 document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
 document.getElementById(id).classList.add("active")
 }
 
+/* ===== DAFTAR PPDB ===== */
 function daftarPPDB(e){
 e.preventDefault()
 dataPPDB={
@@ -163,21 +160,23 @@ ppdb_hasil.innerHTML=`
 Nama: ${dataPPDB.nama}<br>
 NISN: ${dataPPDB.nisn}<br>
 Asal: ${dataPPDB.asal}<br>
-Jurusan: ${dataPPDB.jurusan}`
-userPanel.style.display="block"
-if(isAdmin) adminPanel.style.display="block"
+Jurusan: ${dataPPDB.jurusan}
+`
+alert("Pendaftaran berhasil. Login admin untuk kelola data.")
 }
 
+/* ===== LOGIN ADMIN ===== */
 function loginAdmin(){
 if(admin_user.value==="admin" && admin_pass.value==="12345"){
 isAdmin=true
-login_info.innerHTML="Login berhasil"
+login_info.innerHTML="Login admin berhasil"
 adminPanel.style.display="block"
 }else{
-login_info.innerHTML="Username / Password salah"
+login_info.innerHTML="Username atau password salah"
 }
 }
 
+/* ===== ADMIN ===== */
 function editData(){
 ppdb_nama.value=dataPPDB.nama
 ppdb_nisn.value=dataPPDB.nisn
@@ -186,10 +185,9 @@ ppdb_jurusan.value=dataPPDB.jurusan
 }
 
 function hapusData(){
-if(confirm("Hapus data?")){
+if(confirm("Hapus data PPDB?")){
 ppdb_hasil.innerHTML=""
 adminPanel.style.display="none"
-userPanel.style.display="none"
 }
 }
 
@@ -202,6 +200,11 @@ alert(
 )
 }
 
+function cetakData(){
+window.print()
+}
+
+/* ===== ERAPORT ===== */
 function hitung(){
 let r=(+n1.value + +n2.value + +n3.value + +n4.value)/4
 hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2)
@@ -210,6 +213,8 @@ hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2)
 
 </body>
 </html>
+
+
 
 
 
