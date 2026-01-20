@@ -76,48 +76,88 @@ section.active{display:block}
 <div class="hero">
 <h2>PPDB Online</h2>
 </div>
-<!-- LOGIN ADMIN -->
-<div class="card" id="loginAdmin">
-  <h3>Login Admin</h3>
-  <input id="admin_user" placeholder="Username">
-  <input id="admin_pass" type="password" placeholder="Password">
-  <button onclick="loginAdmin()">Login</button>
-  <p id="login_info" style="color:red;"></p>
-</div>
+<script>
+/* ====== LOGIN ADMIN ====== */
+let isAdmin = false;
+let dataPPDB = {};
 
-<div class="card">
-<form onsubmit="daftarPPDB(event)">
-<input id="ppdb_nama" placeholder="Nama Lengkap" required>
-<input id="ppdb_nisn" placeholder="NISN" required>
-<input id="ppdb_asal" placeholder="Asal Sekolah" required>
+function loginAdmin() {
+  const user = admin_user.value;
+  const pass = admin_pass.value;
 
-<select id="ppdb_jurusan" required>
-<option value="">Pilih Jurusan</option>
-<option>DKV</option>
-<option>Usaha Layanan Wisata</option>
-<option>Perhotelan</option>
-<option>Tata Boga</option>
-</select>
+  if (user === "admin" && pass === "12345") {
+    isAdmin = true;
+    loginAdmin.style.display = "none";
+    login_info.innerHTML = "";
+    alert("Login admin berhasil");
+  } else {
+    login_info.innerHTML = "Username atau password salah!";
+  }
+}
 
-<button type="submit">Daftar</button>
-</form>
+/* ====== MENU ====== */
+function showMenu(id) {
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
 
-<div id="ppdb_hasil"></div>
+/* ====== PPDB ====== */
+function daftarPPDB(e) {
+  e.preventDefault();
 
-<!-- ADMIN -->
-<div id="adminPanel" style="display:none">
-<h3>Panel Admin</h3>
-<button onclick="editData()">✏️ Edit</button>
-<button onclick="hapusData()" style="background:#dc3545">🗑️ Hapus</button>
-</div>
+  dataPPDB = {
+    nama: ppdb_nama.value,
+    nisn: ppdb_nisn.value,
+    asal: ppdb_asal.value,
+    jurusan: ppdb_jurusan.value
+  };
 
-<!-- USER -->
-<div id="userPanel" style="display:none">
-<h3>Menu User</h3>
-<button onclick="lihatData()">👁️ Lihat Data</button>
-<button onclick="window.print()">🖨️ Cetak</button>
-</div>
-</div>
+  ppdb_hasil.innerHTML = `
+    <hr>
+    <b>Pendaftaran Berhasil!</b><br>
+    Nama: ${dataPPDB.nama}<br>
+    NISN: ${dataPPDB.nisn}<br>
+    Asal: ${dataPPDB.asal}<br>
+    Jurusan: ${dataPPDB.jurusan}
+  `;
+
+  userPanel.style.display = "block";
+  if (isAdmin) adminPanel.style.display = "block";
+}
+
+/* ====== ADMIN ====== */
+function editData() {
+  if (!isAdmin) return alert("Akses admin!");
+  ppdb_nama.value = dataPPDB.nama;
+  ppdb_nisn.value = dataPPDB.nisn;
+  ppdb_asal.value = dataPPDB.asal;
+  ppdb_jurusan.value = dataPPDB.jurusan;
+}
+
+function hapusData() {
+  if (!isAdmin) return alert("Akses admin!");
+  if (confirm("Hapus data?")) {
+    ppdb_hasil.innerHTML = "";
+    adminPanel.style.display = "none";
+    userPanel.style.display = "none";
+  }
+}
+
+/* ====== USER ====== */
+function lihatData() {
+  alert(
+    "Nama: " + dataPPDB.nama +
+    "\nNISN: " + dataPPDB.nisn +
+    "\nAsal: " + dataPPDB.asal +
+    "\nJurusan: " + dataPPDB.jurusan
+  );
+}
+
+/* ====== ERAPORT ====== */
+function hitung() {
+  let r = (+n1.value + +n2.value + +n3.value + +n4.value) / 4;
+  hasil.innerHTML = "<b>Rata-rata:</b> " + r.toFixed(2);
+}
 </section>
 
 <!-- ERAPORT -->
@@ -199,6 +239,7 @@ hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2);
 
 </body>
 </html>
+
 
 
 
