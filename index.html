@@ -76,6 +76,14 @@ section.active{display:block}
 <div class="hero">
 <h2>PPDB Online</h2>
 </div>
+<!-- LOGIN ADMIN -->
+<div class="card" id="loginAdmin">
+  <h3>Login Admin</h3>
+  <input id="admin_user" placeholder="Username">
+  <input id="admin_pass" type="password" placeholder="Password">
+  <button onclick="loginAdmin()">Login</button>
+  <p id="login_info" style="color:red;"></p>
+</div>
 
 <div class="card">
 <form onsubmit="daftarPPDB(event)">
@@ -191,6 +199,7 @@ hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2);
 
 </body>
 </html>
+
 
 
 
