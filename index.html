@@ -1,280 +1,197 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMKN 1 Praya Barat</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMKN 1 Praya Barat</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: #f5f7fa;
-      color: #333;
-    }
-
-    header {
-      background: #0b5ed7;
-      color: #fff;
-      padding: 20px;
-    }
-
-    nav {
-      background: #084298;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: #fff;
-      padding: 12px 16px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      background: #0d6efd;
-    }
-
-    .container {
-      padding: 20px;
-    }
-
-    .hero, .card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-
-    th, td {
-      padding: 8px;
-    }
-
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-    }
-
-    button {
-      background: #0b5ed7;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    footer {
-      background: #084298;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 30px;
-    }
-
-    /* === PENTING: MENU TERPISAH === */
-    section {
-      display: none;
-    }
-
-    section.active {
-      display: block;
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#f5f7fa}
+header{background:#0b5ed7;color:#fff;padding:20px}
+nav{background:#084298;display:flex;flex-wrap:wrap}
+nav a{color:#fff;padding:12px 16px;cursor:pointer;text-decoration:none}
+nav a:hover{background:#0d6efd}
+.container{padding:20px}
+.hero,.card{background:#fff;padding:20px;border-radius:8px;margin-bottom:20px}
+input,select,button{width:100%;padding:8px;margin-bottom:10px}
+button{background:#0b5ed7;color:#fff;border:none;border-radius:5px;cursor:pointer}
+footer{background:#084298;color:#fff;text-align:center;padding:15px}
+section{display:none}
+section.active{display:block}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>SMK Negeri 1 Praya Barat</h1>
-  <p>Sekolah Menengah Kejuruan – Lombok Tengah</p>
+<h1>SMK Negeri 1 Praya Barat</h1>
+<p>Sekolah Menengah Kejuruan – Lombok Tengah</p>
 </header>
 
 <nav>
-  <a onclick="showMenu('beranda')">Beranda</a>
-  <a onclick="showMenu('profil')">Profil</a>
-  <a onclick="showMenu('jurusan')">Jurusan</a>
-  <a onclick="showMenu('guru')">Guru & TU</a>
-  <a onclick="showMenu('ppdb')">PPDB</a>
-  <a onclick="showMenu('eraport')">E-Raport</a>
+<a onclick="showMenu('beranda')">Beranda</a>
+<a onclick="showMenu('profil')">Profil</a>
+<a onclick="showMenu('jurusan')">Jurusan</a>
+<a onclick="showMenu('guru')">Guru & TU</a>
+<a onclick="showMenu('ppdb')">PPDB</a>
+<a onclick="showMenu('eraport')">E-Raport</a>
 </nav>
 
-<!-- BERANDA -->
 <section id="beranda" class="container active">
-  <div class="hero">
-    <h2>Selamat Datang</h2>
-    <p>Website resmi SMK Negeri 1 Praya Barat.</p>
-  </div>
+<div class="hero">
+<h2>Selamat Datang</h2>
+<p>Website resmi SMKN 1 Praya Barat</p>
+</div>
 </section>
 
-<!-- PROFIL -->
 <section id="profil" class="container">
-  <div class="card">
-    <h2>Profil Sekolah</h2>
-    <p>
-      SMK Negeri 1 Praya Barat adalah sekolah kejuruan yang berkomitmen
-      mencetak lulusan siap kerja dan berkarakter.
-    </p>
-  </div>
+<div class="card">
+<h2>Profil Sekolah</h2>
+<p>SMKN 1 Praya Barat mencetak lulusan siap kerja.</p>
+</div>
 </section>
 
-<!-- JURUSAN -->
 <section id="jurusan" class="container">
-  <div class="card">
-    <h2>Kompetensi Keahlian</h2>
-    <ul>
-      <li>Desain Komunikasi Visual</li>
-      <li>Usaha Layanan Wisata</li>
-      <li>Perhotelan</li>
-      <li>Tata Boga</li>
-    </ul>
-  </div>
+<div class="card">
+<h2>Jurusan</h2>
+<ul>
+<li>DKV</li>
+<li>Usaha Layanan Wisata</li>
+<li>Perhotelan</li>
+<li>Tata Boga</li>
+</ul>
+</div>
 </section>
 
-<!-- GURU -->
 <section id="guru" class="container">
-  <div class="card">
-    <h2>Guru & Tata Usaha</h2>
-    <p>Data tenaga pendidik dan kependidikan.</p>
-  </div>
+<div class="card">
+<h2>Guru & TU</h2>
+<p>Data tenaga pendidik</p>
+</div>
 </section>
 
 <!-- PPDB -->
 <section id="ppdb" class="container">
-  <div class="hero">
-    <h2>PPDB Online</h2>
-    <p>Penerimaan Peserta Didik Baru</p>
-  </div>
+<div class="hero">
+<h2>PPDB Online</h2>
+</div>
 
-  <div class="card">
-    <form onsubmit="daftarPPDB(event)">
-      <input id="ppdb_nama" placeholder="Nama Lengkap" required>
-      <input id="ppdb_nisn" placeholder="NISN" required>
-      <input id="ppdb_asal" placeholder="Asal Sekolah" required>
+<div class="card">
+<form onsubmit="daftarPPDB(event)">
+<input id="ppdb_nama" placeholder="Nama Lengkap" required>
+<input id="ppdb_nisn" placeholder="NISN" required>
+<input id="ppdb_asal" placeholder="Asal Sekolah" required>
 
-      <select id="ppdb_jurusan" required>
-        <option value="">Pilih Jurusan</option>
-        <option>DKV</option>
-        <option>Usaha Layanan Wisata</option>
-        <option>Perhotelan</option>
-        <option>Tata Boga</option>
-      </select>
+<select id="ppdb_jurusan" required>
+<option value="">Pilih Jurusan</option>
+<option>DKV</option>
+<option>Usaha Layanan Wisata</option>
+<option>Perhotelan</option>
+<option>Tata Boga</option>
+</select>
 
-      <button type="submit">Daftar</button>
-    </form>
+<button type="submit">Daftar</button>
+</form>
 
-    <div id="ppdb_hasil"></div>
-  </div>
-   <!-- PANEL ADMIN -->
-    <div id="adminPanel" style="display:none;">
-      <h3>Panel Admin</h3>
-      <button onclick="editData()">✏️ Edit</button>
-      <button onclick="hapusData()" style="background:#dc3545;">🗑️ Hapus</button>
-    </div>
+<div id="ppdb_hasil"></div>
 
-    <!-- PANEL USER -->
-    <div id="userPanel" style="display:none;">
-      <h3>Menu User</h3>
-      <button onclick="lihatData()">👁️ Lihat Data</button>
-      <button onclick="window.print()">🖨️ Cetak</button>
-    </div>
+<!-- ADMIN -->
+<div id="adminPanel" style="display:none">
+<h3>Panel Admin</h3>
+<button onclick="editData()">✏️ Edit</button>
+<button onclick="hapusData()" style="background:#dc3545">🗑️ Hapus</button>
+</div>
 
-  </div>
+<!-- USER -->
+<div id="userPanel" style="display:none">
+<h3>Menu User</h3>
+<button onclick="lihatData()">👁️ Lihat Data</button>
+<button onclick="window.print()">🖨️ Cetak</button>
+</div>
+</div>
 </section>
 
 <!-- ERAPORT -->
 <section id="eraport" class="container">
-  <div class="hero">
-    <h2>E-Raport</h2>
-    <p>Input dan Cetak Nilai</p>
-  </div>
-
-  <div class="card">
-    <input id="nama" placeholder="Nama Siswa">
-    <input id="kelas" placeholder="Kelas">
-    <input id="jurusanSiswa" placeholder="Jurusan">
-
-    <table>
-      <tr><th>Mata Pelajaran</th><th>Nilai</th></tr>
-      <tr><td>Bahasa Indonesia</td><td><input id="n1" type="number"></td></tr>
-      <tr><td>PPKn</td><td><input id="n2" type="number"></td></tr>
-      <tr><td>Matematika</td><td><input id="n3" type="number"></td></tr>
-      <tr><td>Produktif</td><td><input id="n4" type="number"></td></tr>
-    </table>
-
-    <button onclick="hitung()">Proses</button>
-    <button onclick="window.print()">Cetak</button>
-
-    <div id="hasil"></div>
-  </div>
+<div class="card">
+<input id="n1" type="number" placeholder="Nilai 1">
+<input id="n2" type="number" placeholder="Nilai 2">
+<input id="n3" type="number" placeholder="Nilai 3">
+<input id="n4" type="number" placeholder="Nilai 4">
+<button onclick="hitung()">Proses</button>
+<div id="hasil"></div>
+</div>
 </section>
 
-<footer>
-  © 2026 SMK Negeri 1 Praya Barat
-</footer>
+<footer>© 2026 SMKN 1 Praya Barat</footer>
 
-  <script>
-function daftarPPDB(e) {
-  e.preventDefault(); // INI YANG MENCEGAH PINDAH KE BERANDA
-
-  let nama = document.getElementById("ppdb_nama").value;
-  let nisn = document.getElementById("ppdb_nisn").value;
-  let asal = document.getElementById("ppdb_asal").value;
-  let jurusan = document.getElementById("ppdb_jurusan").value;
-
-  document.getElementById("ppdb_hasil").innerHTML = `
-    <hr>
-    <p><b>Pendaftaran Berhasil!</b></p>
-    <p>Nama: ${nama}</p>
-    <p>NISN: ${nisn}</p>
-    <p>Asal Sekolah: ${asal}</p>
-    <p>Jurusan: ${jurusan}</p>
-  `;
-}
-</script>
-</body>
-</html>
-
+<!-- ================= SCRIPT SATU-SATUNYA ================= -->
 <script>
-function showMenu(id) {
-  document.querySelectorAll("section").forEach(sec => {
-    sec.classList.remove("active");
-  });
-  document.getElementById(id).classList.add("active");
+let dataPPDB={};
+
+function showMenu(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-function hitung() {
-  let n1 = Number(document.getElementById("n1").value);
-  let n2 = Number(document.getElementById("n2").value);
-  let n3 = Number(document.getElementById("n3").value);
-  let n4 = Number(document.getElementById("n4").value);
+function daftarPPDB(e){
+e.preventDefault();
 
-  let rata = (n1 + n2 + n3 + n4) / 4;
+dataPPDB={
+nama:ppdb_nama.value,
+nisn:ppdb_nisn.value,
+asal:ppdb_asal.value,
+jurusan:ppdb_jurusan.value
+};
 
-  document.getElementById("hasil").innerHTML =
-    "<p><b>Rata-rata:</b> " + rata.toFixed(2) + "</p>";
+ppdb_hasil.innerHTML=`
+<hr>
+<b>Pendaftaran Berhasil!</b><br>
+Nama: ${dataPPDB.nama}<br>
+NISN: ${dataPPDB.nisn}<br>
+Asal: ${dataPPDB.asal}<br>
+Jurusan: ${dataPPDB.jurusan}
+`;
+
+adminPanel.style.display="block";
+userPanel.style.display="block";
+}
+
+function editData(){
+ppdb_nama.value=dataPPDB.nama;
+ppdb_nisn.value=dataPPDB.nisn;
+ppdb_asal.value=dataPPDB.asal;
+ppdb_jurusan.value=dataPPDB.jurusan;
+alert("Data siap diedit");
+}
+
+function hapusData(){
+if(confirm("Hapus data?")){
+ppdb_hasil.innerHTML="";
+adminPanel.style.display="none";
+userPanel.style.display="none";
+}
+}
+
+function lihatData(){
+alert(
+"Nama: "+dataPPDB.nama+
+"\nNISN: "+dataPPDB.nisn+
+"\nAsal: "+dataPPDB.asal+
+"\nJurusan: "+dataPPDB.jurusan
+);
+}
+
+function hitung(){
+let r=(+n1.value + +n2.value + +n3.value + +n4.value)/4;
+hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2);
 }
 </script>
 
 </body>
 </html>
+
 
 
 
