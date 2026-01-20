@@ -19,6 +19,7 @@ button{background:#0b5ed7;color:#fff;border:none;border-radius:5px;cursor:pointe
 footer{background:#084298;color:#fff;text-align:center;padding:15px}
 section{display:none}
 section.active{display:block}
+.admin{background:#fff3cd;border-left:5px solid #ffc107;padding:15px;margin-top:15px}
 </style>
 </head>
 
@@ -38,20 +39,23 @@ section.active{display:block}
 <a onclick="showMenu('eraport')">E-Raport</a>
 </nav>
 
+<!-- BERANDA -->
 <section id="beranda" class="container active">
 <div class="hero">
 <h2>Selamat Datang</h2>
-<p>Website resmi SMKN 1 Praya Barat</p>
+<p>Website Resmi SMKN 1 Praya Barat</p>
 </div>
 </section>
 
+<!-- PROFIL -->
 <section id="profil" class="container">
 <div class="card">
 <h2>Profil Sekolah</h2>
-<p>SMKN 1 Praya Barat mencetak lulusan siap kerja.</p>
+<p>SMKN 1 Praya Barat mencetak lulusan siap kerja dan berakhlak.</p>
 </div>
 </section>
 
+<!-- JURUSAN -->
 <section id="jurusan" class="container">
 <div class="card">
 <h2>Jurusan</h2>
@@ -64,105 +68,68 @@ section.active{display:block}
 </div>
 </section>
 
+<!-- GURU -->
 <section id="guru" class="container">
 <div class="card">
 <h2>Guru & TU</h2>
-<p>Data tenaga pendidik</p>
+<p>Data Tenaga Pendidik dan Kependidikan</p>
 </div>
 </section>
 
 <!-- PPDB -->
 <section id="ppdb" class="container">
+
 <div class="hero">
 <h2>PPDB Online</h2>
 </div>
-<script>
-/* ====== LOGIN ADMIN ====== */
-let isAdmin = false;
-let dataPPDB = {};
 
-function loginAdmin() {
-  const user = admin_user.value;
-  const pass = admin_pass.value;
+<!-- FORM PENDAFTAR -->
+<div class="card">
+<h3>Form Pendaftaran</h3>
+<form onsubmit="daftarPPDB(event)">
+<input id="ppdb_nama" placeholder="Nama Lengkap" required>
+<input id="ppdb_nisn" placeholder="NISN" required>
+<input id="ppdb_asal" placeholder="Asal Sekolah" required>
+<select id="ppdb_jurusan" required>
+<option value="">Pilih Jurusan</option>
+<option>DKV</option>
+<option>Usaha Layanan Wisata</option>
+<option>Perhotelan</option>
+<option>Tata Boga</option>
+</select>
+<button>Daftar</button>
+</form>
+<div id="ppdb_hasil"></div>
+</div>
 
-  if (user === "admin" && pass === "12345") {
-    isAdmin = true;
-    loginAdmin.style.display = "none";
-    login_info.innerHTML = "";
-    alert("Login admin berhasil");
-  } else {
-    login_info.innerHTML = "Username atau password salah!";
-  }
-}
+<!-- PANEL USER -->
+<div id="userPanel" class="card" style="display:none">
+<h3>Panel Peserta</h3>
+<button onclick="lihatData()">Lihat Data</button>
+</div>
 
-/* ====== MENU ====== */
-function showMenu(id) {
-  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
+<!-- LOGIN ADMIN -->
+<div class="card">
+<h3>Login Admin</h3>
+<input id="admin_user" placeholder="Username">
+<input id="admin_pass" type="password" placeholder="Password">
+<button onclick="loginAdmin()">Login</button>
+<p id="login_info"></p>
+</div>
 
-/* ====== PPDB ====== */
-function daftarPPDB(e) {
-  e.preventDefault();
+<!-- PANEL ADMIN -->
+<div id="adminPanel" class="admin" style="display:none">
+<h3>Panel Admin</h3>
+<button onclick="editData()">Edit Data</button>
+<button onclick="hapusData()">Hapus Data</button>
+</div>
 
-  dataPPDB = {
-    nama: ppdb_nama.value,
-    nisn: ppdb_nisn.value,
-    asal: ppdb_asal.value,
-    jurusan: ppdb_jurusan.value
-  };
-
-  ppdb_hasil.innerHTML = `
-    <hr>
-    <b>Pendaftaran Berhasil!</b><br>
-    Nama: ${dataPPDB.nama}<br>
-    NISN: ${dataPPDB.nisn}<br>
-    Asal: ${dataPPDB.asal}<br>
-    Jurusan: ${dataPPDB.jurusan}
-  `;
-
-  userPanel.style.display = "block";
-  if (isAdmin) adminPanel.style.display = "block";
-}
-
-/* ====== ADMIN ====== */
-function editData() {
-  if (!isAdmin) return alert("Akses admin!");
-  ppdb_nama.value = dataPPDB.nama;
-  ppdb_nisn.value = dataPPDB.nisn;
-  ppdb_asal.value = dataPPDB.asal;
-  ppdb_jurusan.value = dataPPDB.jurusan;
-}
-
-function hapusData() {
-  if (!isAdmin) return alert("Akses admin!");
-  if (confirm("Hapus data?")) {
-    ppdb_hasil.innerHTML = "";
-    adminPanel.style.display = "none";
-    userPanel.style.display = "none";
-  }
-}
-
-/* ====== USER ====== */
-function lihatData() {
-  alert(
-    "Nama: " + dataPPDB.nama +
-    "\nNISN: " + dataPPDB.nisn +
-    "\nAsal: " + dataPPDB.asal +
-    "\nJurusan: " + dataPPDB.jurusan
-  );
-}
-
-/* ====== ERAPORT ====== */
-function hitung() {
-  let r = (+n1.value + +n2.value + +n3.value + +n4.value) / 4;
-  hasil.innerHTML = "<b>Rata-rata:</b> " + r.toFixed(2);
-}
 </section>
 
 <!-- ERAPORT -->
 <section id="eraport" class="container">
 <div class="card">
+<h2>E-Raport (Rata-Rata)</h2>
 <input id="n1" type="number" placeholder="Nilai 1">
 <input id="n2" type="number" placeholder="Nilai 2">
 <input id="n3" type="number" placeholder="Nilai 3">
@@ -174,51 +141,55 @@ function hitung() {
 
 <footer>© 2026 SMKN 1 Praya Barat</footer>
 
-<!-- ================= SCRIPT SATU-SATUNYA ================= -->
 <script>
-let dataPPDB={};
+let dataPPDB={}
+let isAdmin=false
 
 function showMenu(id){
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
+document.getElementById(id).classList.add("active")
 }
 
 function daftarPPDB(e){
-e.preventDefault();
-
+e.preventDefault()
 dataPPDB={
 nama:ppdb_nama.value,
 nisn:ppdb_nisn.value,
 asal:ppdb_asal.value,
 jurusan:ppdb_jurusan.value
-};
-
+}
 ppdb_hasil.innerHTML=`
-<hr>
-<b>Pendaftaran Berhasil!</b><br>
+<hr><b>Pendaftaran Berhasil</b><br>
 Nama: ${dataPPDB.nama}<br>
 NISN: ${dataPPDB.nisn}<br>
 Asal: ${dataPPDB.asal}<br>
-Jurusan: ${dataPPDB.jurusan}
-`;
+Jurusan: ${dataPPDB.jurusan}`
+userPanel.style.display="block"
+if(isAdmin) adminPanel.style.display="block"
+}
 
-adminPanel.style.display="block";
-userPanel.style.display="block";
+function loginAdmin(){
+if(admin_user.value==="admin" && admin_pass.value==="12345"){
+isAdmin=true
+login_info.innerHTML="Login berhasil"
+adminPanel.style.display="block"
+}else{
+login_info.innerHTML="Username / Password salah"
+}
 }
 
 function editData(){
-ppdb_nama.value=dataPPDB.nama;
-ppdb_nisn.value=dataPPDB.nisn;
-ppdb_asal.value=dataPPDB.asal;
-ppdb_jurusan.value=dataPPDB.jurusan;
-alert("Data siap diedit");
+ppdb_nama.value=dataPPDB.nama
+ppdb_nisn.value=dataPPDB.nisn
+ppdb_asal.value=dataPPDB.asal
+ppdb_jurusan.value=dataPPDB.jurusan
 }
 
 function hapusData(){
 if(confirm("Hapus data?")){
-ppdb_hasil.innerHTML="";
-adminPanel.style.display="none";
-userPanel.style.display="none";
+ppdb_hasil.innerHTML=""
+adminPanel.style.display="none"
+userPanel.style.display="none"
 }
 }
 
@@ -228,17 +199,19 @@ alert(
 "\nNISN: "+dataPPDB.nisn+
 "\nAsal: "+dataPPDB.asal+
 "\nJurusan: "+dataPPDB.jurusan
-);
+)
 }
 
 function hitung(){
-let r=(+n1.value + +n2.value + +n3.value + +n4.value)/4;
-hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2);
+let r=(+n1.value + +n2.value + +n3.value + +n4.value)/4
+hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2)
 }
 </script>
 
 </body>
 </html>
+
+
 
 
 
