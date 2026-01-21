@@ -39,7 +39,6 @@ section.active{display:block}
 <a onclick="showMenu('eraport')">E-Raport</a>
 </nav>
 
-<!-- BERANDA -->
 <section id="beranda" class="container active">
 <div class="hero">
 <h2>Selamat Datang</h2>
@@ -47,7 +46,6 @@ section.active{display:block}
 </div>
 </section>
 
-<!-- PROFIL -->
 <section id="profil" class="container">
 <div class="card">
 <h2>Profil Sekolah</h2>
@@ -55,7 +53,6 @@ section.active{display:block}
 </div>
 </section>
 
-<!-- JURUSAN -->
 <section id="jurusan" class="container">
 <div class="card">
 <h2>Jurusan</h2>
@@ -68,7 +65,6 @@ section.active{display:block}
 </div>
 </section>
 
-<!-- GURU -->
 <section id="guru" class="container">
 <div class="card">
 <h2>Guru & TU</h2>
@@ -76,14 +72,12 @@ section.active{display:block}
 </div>
 </section>
 
-<!-- PPDB -->
 <section id="ppdb" class="container">
 
 <div class="hero">
 <h2>PPDB Online</h2>
 </div>
 
-<!-- FORM PENDAFTAR -->
 <div class="card">
 <h3>Form Pendaftaran</h3>
 <form onsubmit="daftarPPDB(event)">
@@ -102,7 +96,6 @@ section.active{display:block}
 <div id="ppdb_hasil"></div>
 </div>
 
-<!-- LOGIN ADMIN -->
 <div class="card">
 <h3>Login Admin</h3>
 <input id="admin_user" placeholder="Username">
@@ -111,7 +104,6 @@ section.active{display:block}
 <p id="login_info"></p>
 </div>
 
-<!-- PANEL ADMIN (SEMBUNYI SEBELUM LOGIN) -->
 <div id="adminPanel" class="admin" style="display:none">
 <h3>Panel Admin</h3>
 <button onclick="lihatData()">Lihat Data</button>
@@ -122,10 +114,9 @@ section.active{display:block}
 
 </section>
 
-<!-- ERAPORT -->
 <section id="eraport" class="container">
 <div class="card">
-<h2>E-Raport (Rata-Rata)</h2>
+<h2>E-Raport</h2>
 <input id="n1" type="number" placeholder="Nilai 1">
 <input id="n2" type="number" placeholder="Nilai 2">
 <input id="n3" type="number" placeholder="Nilai 3">
@@ -146,7 +137,6 @@ document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
 document.getElementById(id).classList.add("active")
 }
 
-/* ===== DAFTAR PPDB ===== */
 function daftarPPDB(e){
 e.preventDefault()
 dataPPDB={
@@ -155,20 +145,15 @@ nisn:ppdb_nisn.value,
 asal:ppdb_asal.value,
 jurusan:ppdb_jurusan.value
 }
-ppdb_hasil.innerHTML=`
-<hr><b>Pendaftaran Berhasil</b><br>
+ppdb_hasil.innerHTML=`<hr><b>Pendaftaran Berhasil</b><br>
 Nama: ${dataPPDB.nama}<br>
 NISN: ${dataPPDB.nisn}<br>
 Asal: ${dataPPDB.asal}<br>
-Jurusan: ${dataPPDB.jurusan}
-`
-alert("Pendaftaran berhasil. Login admin untuk kelola data.")
+Jurusan: ${dataPPDB.jurusan}`
 }
 
-/* ===== LOGIN ADMIN ===== */
 function loginAdmin(){
 if(admin_user.value==="admin" && admin_pass.value==="12345"){
-isAdmin=true
 login_info.innerHTML="Login admin berhasil"
 adminPanel.style.display="block"
 }else{
@@ -176,7 +161,6 @@ login_info.innerHTML="Username atau password salah"
 }
 }
 
-/* ===== ADMIN ===== */
 function editData(){
 ppdb_nama.value=dataPPDB.nama
 ppdb_nisn.value=dataPPDB.nisn
@@ -185,65 +169,44 @@ ppdb_jurusan.value=dataPPDB.jurusan
 }
 
 function hapusData(){
-if(confirm("Hapus data PPDB?")){
+if(confirm("Hapus data?")){
+dataPPDB={}
 ppdb_hasil.innerHTML=""
 adminPanel.style.display="none"
 }
 }
 
 function lihatData(){
-alert(
-"Nama: "+dataPPDB.nama+
-"\nNISN: "+dataPPDB.nisn+
-"\nAsal: "+dataPPDB.asal+
-"\nJurusan: "+dataPPDB.jurusan
-)
+alert(JSON.stringify(dataPPDB,null,2))
 }
 
 function cetakData(){
 window.print()
 }
 
-/* ===== ERAPORT ===== */
 function hitung(){
 let r=(+n1.value + +n2.value + +n3.value + +n4.value)/4
 hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2)
 }
 </script>
 
+<!-- FIREBASE (BENAR & AMAN) -->
 <script type="module">
-  import { initializeApp } from
-  "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDSGZQSfffdF-dMRkgFHeV1SEw-9QokVsk",
-    authDomain: "smkn1prabar-466b4.firebaseapp.com",
-    projectId: "smkn1prabar-466b4",
-    storageBucket: "smkn1prabar-466b4.firebasestorage.app",
-    messagingSenderId: "912316129178",
-    appId: "1:912316129178:web:0598d9afb9d173a1dfe423"
-  };
+const firebaseConfig = {
+apiKey: "AIzaSyDSGZQSfffdF-dMRkgFHeV1SEw-9QokVsk",
+authDomain: "smkn1prabar-466b4.firebaseapp.com",
+projectId: "smkn1prabar-466b4",
+storageBucket: "smkn1prabar-466b4.firebasestorage.app",
+messagingSenderId: "912316129178",
+appId: "1:912316129178:web:0598d9afb9d173a1dfe423"
+};
 
-  const app = initializeApp(firebaseConfig);
-  console.log("🔥 Firebase aktif & terhubung");
-</script>
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+initializeApp(firebaseConfig);
+console.log("🔥 Firebase AKTIF & SIAP DIGUNAKAN");
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
