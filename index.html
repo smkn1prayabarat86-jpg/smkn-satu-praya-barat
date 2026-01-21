@@ -207,6 +207,60 @@ appId: "1:912316129178:web:0598d9afb9d173a1dfe423"
 initializeApp(firebaseConfig);
 console.log("🔥 Firebase AKTIF & SIAP DIGUNAKAN");
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs } 
+  from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+  // KONFIGURASI FIREBASE
+  const firebaseConfig = {
+    apiKey: "AIzaSyDSGZQSfffdF-dMRkgFHeV1SEw-9QokVsk",
+    authDomain: "smkn1prabar-466b4.firebaseapp.com",
+    projectId: "smkn1prabar-466b4",
+    storageBucket: "smkn1prabar-466b4.appspot.com",
+    messagingSenderId: "912316129178",
+    appId: "1:912316129178:web:0598d9afb9d173a1dfe423"
+  };
+
+  // INIT FIREBASE
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  console.log("🔥 Firestore siap digunakan");
+
+  // SIMPAN DATA PPDB
+  window.daftarPPDB = async function(e){
+    e.preventDefault();
+
+    const data = {
+      nama: document.getElementById("ppdb_nama").value,
+      nisn: document.getElementById("ppdb_nisn").value,
+      asal: document.getElementById("ppdb_asal").value,
+      jurusan: document.getElementById("ppdb_jurusan").value,
+      waktu: new Date()
+    };
+
+    try {
+      await addDoc(collection(db, "ppdb"), data);
+
+      document.getElementById("ppdb_hasil").innerHTML = `
+        <hr><b>Pendaftaran Berhasil</b><br>
+        Nama: ${data.nama}<br>
+        NISN: ${data.nisn}<br>
+        Asal: ${data.asal}<br>
+        Jurusan: ${data.jurusan}
+      `;
+
+      alert("✅ Data PPDB berhasil disimpan ke Firebase");
+
+    } catch (error) {
+      alert("❌ Gagal menyimpan data");
+      console.error(error);
+    }
+  };
+
+</script>
 
 </body>
 </html>
+
