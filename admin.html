@@ -1,59 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<title>Admin PPDB</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{font-family:Arial;background:#f5f7fa;padding:20px}
-.card{background:#fff;padding:20px;border-radius:8px;max-width:400px;margin:auto}
-table{width:100%;border-collapse:collapse;background:#fff;margin-top:20px}
-th,td{border:1px solid #ddd;padding:8px}
-th{background:#0b5ed7;color:#fff}
-button{padding:6px 10px;border:none;border-radius:4px;cursor:pointer}
-.hapus{background:#dc3545;color:#fff}
-.edit{background:#ffc107}
-.logout{background:#6c757d;color:#fff;margin-bottom:10px}
-.hidden{display:none}
-</style>
-</head>
-
-<body>
-
-<!-- LOGIN -->
-<div id="login" class="card">
-  <h3>🔐 Login Admin</h3>
-  <input id="email" placeholder="Email" type="email"><br><br>
-  <input id="password" placeholder="Password" type="password"><br><br>
-  <button onclick="login()">Login</button>
-  <div id="pesan"></div>
-</div>
-
-<!-- ADMIN -->
-<div id="admin" class="hidden">
-  <button class="logout" onclick="logout()">Logout</button>
-  <h2>📋 Data PPDB</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>NISN</th>
-        <th>Asal</th>
-        <th>Jurusan</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
-    <tbody id="tabel"></tbody>
-  </table>
-</div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
-from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import { 
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 import { 
   getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc 
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
@@ -68,52 +17,62 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// ELEMENT
 const loginBox = document.getElementById("login");
 const adminBox = document.getElementById("admin");
 const tabel = document.getElementById("tabel");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const pesan = document.getElementById("pesan");
 
-// 🔐 STATUS LOGIN
-onAuthStateChanged(auth, user=>{
-  if(user){
-    loginBox.style.display="none";
+let unsub = null;
+
+// STATUS LOGIN
+onAuthStateChanged(auth, user => {
+  if (user) {
+    loginBox.style.display = "none";
     adminBox.classList.remove("hidden");
     loadData();
-  }else{
-    loginBox.style.display="block";
+  } else {
+    loginBox.style.display = "block";
     adminBox.classList.add("hidden");
+    tabel.innerHTML = "";
+    if (unsub) unsub();
   }
 });
 
 // LOGIN
-window.login = async function(){
-  try{
-    await signInWithEmailAndPassword(auth,email.value,password.value);
-  }catch(e){
-    pesan.innerText = "❌ Login gagal";
+window.login = async function () {
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    pesan.innerText = "";
+  } catch (e) {
+    pesan.innerText = "❌ Email atau password salah";
   }
-}
+};
 
 // LOGOUT
-window.logout = function(){
+window.logout = function () {
   signOut(auth);
-}
+};
 
 // LOAD DATA
-function loadData(){
-  let no=1;
-  onSnapshot(collection(db,"ppdb"), snap=>{
-    tabel.innerHTML="";
-    snap.forEach(d=>{
-      const x=d.data();
-      tabel.innerHTML+=`
+function loadData() {
+  let no = 1;
+  unsub = onSnapshot(collection(db, "ppdb"), snap => {
+    tabel.innerHTML = "";
+    no = 1;
+    snap.forEach(d => {
+      const x = d.data();
+      tabel.innerHTML += `
         <tr>
           <td>${no++}</td>
-          <td>${x.nama}</td>
-          <td>${x.nisn}</td>
-          <td>${x.asal}</td>
-          <td>${x.jurusan}</td>
+          <td>${x.nama || "-"}</td>
+          <td>${x.nisn || "-"}</td>
+          <td>${x.asal || "-"}</td>
+          <td>${x.jurusan || "-"}</td>
           <td>
-            <button class="edit" onclick="editData('${d.id}','${x.nama}')">Edit</button>
+            <button class="edit" onclick="editData('${d.id}','${x.nama || ""}')">Edit</button>
             <button class="hapus" onclick="hapusData('${d.id}')">Hapus</button>
           </td>
         </tr>`;
@@ -122,13 +81,19 @@ function loadData(){
 }
 
 // EDIT
-window.editData = async function(id,nama){
-  const baru=prompt("Nama baru:",nama);
-  if(baru){
-    await updateDoc(doc(db,"ppdb",id),{nama:baru});
+window.editData = async function (id, nama) {
+  const baru = prompt("Nama baru:", nama);
+  if (baru) {
+    await updateDoc(doc(db, "ppdb", id), { nama: baru });
   }
-}
+};
 
 // HAPUS
-window.hapusData = async function(id){
-  if(confirm("Hapus data ini?")){
+window.hapusData = async function (id) {
+  if (confirm("Hapus data ini?")) {
+    await deleteDoc(doc(db, "ppdb", id));
+  }
+};
+</script>
+
+
