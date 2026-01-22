@@ -173,6 +173,45 @@ window.daftarPPDB = async function(e){
   }
 };
 </script>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin PPDB</title>
+</head>
+<body>
+
+<h2>Data Pendaftar</h2>
+<button onclick="editData('001')">Edit Nama</button>
+
+<!-- SCRIPT FIREBASE DITARUH DI SINI -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, update } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "API_KEY",
+  authDomain: "xxx.firebaseapp.com",
+  databaseURL: "https://xxx.firebaseio.com",
+  projectId: "xxx",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// FUNGSI EDIT
+window.editData = function(id){
+  const namaBaru = prompt("Masukkan nama baru:");
+  if(namaBaru){
+    update(ref(db, 'pendaftar/' + id), {
+      nama: namaBaru
+    });
+    alert("Data berhasil diubah");
+  }
+}
+</script>
 
 </body>
 </html>
+
