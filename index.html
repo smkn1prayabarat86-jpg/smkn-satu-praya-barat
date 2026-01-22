@@ -19,7 +19,6 @@ button{background:#0b5ed7;color:#fff;border:none;border-radius:5px;cursor:pointe
 footer{background:#084298;color:#fff;text-align:center;padding:15px}
 section{display:none}
 section.active{display:block}
-.admin{background:#fff3cd;border-left:5px solid #ffc107;padding:15px;margin-top:15px}
 </style>
 </head>
 
@@ -33,10 +32,7 @@ section.active{display:block}
 <nav>
 <a onclick="showMenu('beranda')">Beranda</a>
 <a onclick="showMenu('profil')">Profil</a>
-<a onclick="showMenu('jurusan')">Jurusan</a>
-<a onclick="showMenu('guru')">Guru & TU</a>
 <a onclick="showMenu('ppdb')">PPDB</a>
-<a onclick="showMenu('eraport')">E-Raport</a>
 </nav>
 
 <section id="beranda" class="container active">
@@ -53,59 +49,26 @@ section.active{display:block}
 </div>
 </section>
 
-<section id="jurusan" class="container">
-<div class="card">
-<h2>Jurusan</h2>
-<ul>
-<li>DKV</li>
-<li>Usaha Layanan Wisata</li>
-<li>Perhotelan</li>
-<li>Tata Boga</li>
-</ul>
-</div>
-</section>
-
-<section id="guru" class="container">
-<div class="card">
-<h2>Guru & TU</h2>
-<p>Data Tenaga Pendidik dan Kependidikan</p>
-</div>
-</section>
-
 <section id="ppdb" class="container">
-
-<div class="hero">
-<h2>PPDB Online</h2>
-</div>
-
 <div class="card">
-<h3>Form Pendaftaran</h3>
+<h2>PPDB Online</h2>
+
 <form onsubmit="daftarPPDB(event)">
-<input id="ppdb_nama" placeholder="Nama Lengkap" required>
-<input id="ppdb_nisn" placeholder="NISN" required>
-<input id="ppdb_asal" placeholder="Asal Sekolah" required>
-<select id="ppdb_jurusan" required>
+<input id="nama" placeholder="Nama Lengkap" required>
+<input id="nisn" placeholder="NISN" required>
+<input id="asal" placeholder="Asal Sekolah" required>
+
+<select id="jurusan" required>
 <option value="">Pilih Jurusan</option>
 <option>DKV</option>
 <option>Usaha Layanan Wisata</option>
 <option>Perhotelan</option>
 <option>Tata Boga</option>
 </select>
+
 <button>Daftar</button>
 </form>
-<div id="ppdb_hasil"></div>
-</div>
 
-</section>
-
-<section id="eraport" class="container">
-<div class="card">
-<h2>E-Raport</h2>
-<input id="n1" type="number" placeholder="Nilai 1">
-<input id="n2" type="number" placeholder="Nilai 2">
-<input id="n3" type="number" placeholder="Nilai 3">
-<input id="n4" type="number" placeholder="Nilai 4">
-<button onclick="hitung()">Proses</button>
 <div id="hasil"></div>
 </div>
 </section>
@@ -114,104 +77,42 @@ section.active{display:block}
 
 <script>
 function showMenu(id){
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
-document.getElementById(id).classList.add("active")
-}
-
-function hitung(){
-let r=(+n1.value + +n2.value + +n3.value + +n4.value)/4
-hasil.innerHTML="<b>Rata-rata:</b> "+r.toFixed(2)
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 </script>
 
-<!-- ================= FIREBASE + FIRESTORE ================= -->
+<!-- ===== FIREBASE FIRESTORE ===== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getFirestore, collection, addDoc } 
 from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDSGZQSfffdF-dMRkgFHeV1SEw-9QokVsk",
-  authDomain: "smkn1prabar-466b4.firebaseapp.com",
-  projectId: "smkn1prabar-466b4",
-  storageBucket: "smkn1prabar-466b4.appspot.com",
-  messagingSenderId: "912316129178",
-  appId: "1:912316129178:web:0598d9afb9d173a1dfe423"
+  apiKey: "API_KEY_ANDA",
+  authDomain: "PROJECT.firebaseapp.com",
+  projectId: "PROJECT"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-console.log("🔥 Firebase & Firestore AKTIF");
-
 window.daftarPPDB = async function(e){
   e.preventDefault();
 
   const data = {
-    nama: ppdb_nama.value,
-    nisn: ppdb_nisn.value,
-    asal: ppdb_asal.value,
-    jurusan: ppdb_jurusan.value,
+    nama: nama.value,
+    nisn: nisn.value,
+    asal: asal.value,
+    jurusan: jurusan.value,
     waktu: new Date()
   };
 
-  try {
-    await addDoc(collection(db,"ppdb"), data);
+  await addDoc(collection(db,"ppdb"), data);
 
-    ppdb_hasil.innerHTML = `
-    <hr><b>✅ Pendaftaran Berhasil</b><br>
-    Nama: ${data.nama}<br>
-    NISN: ${data.nisn}<br>
-    Asal: ${data.asal}<br>
-    Jurusan: ${data.jurusan}`;
-
-    alert("Data berhasil disimpan ke Firebase");
-
-  } catch (err) {
-    alert("❌ Gagal menyimpan data");
-    console.error(err);
-  }
+  hasil.innerHTML = `<b>✅ Pendaftaran berhasil</b><br>Nama: ${data.nama}`;
 };
-</script>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Admin PPDB</title>
-</head>
-<body>
-
-<h2>Data Pendaftar</h2>
-<button onclick="editData('001')">Edit Nama</button>
-
-<!-- SCRIPT FIREBASE DITARUH DI SINI -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, update } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "xxx.firebaseapp.com",
-  databaseURL: "https://xxx.firebaseio.com",
-  projectId: "xxx",
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// FUNGSI EDIT
-window.editData = function(id){
-  const namaBaru = prompt("Masukkan nama baru:");
-  if(namaBaru){
-    update(ref(db, 'pendaftar/' + id), {
-      nama: namaBaru
-    });
-    alert("Data berhasil diubah");
-  }
-}
 </script>
 
 </body>
 </html>
-
