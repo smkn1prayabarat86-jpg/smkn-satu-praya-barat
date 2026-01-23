@@ -3,155 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMKN 1 Praya Barat</title>
+<title>PPDB - SMKN 1 Praya Barat</title>
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
-body{background:#f5f7fa}
-header{background:#0b5ed7;color:#fff;padding:20px}
-
-/* NAV */
-nav{background:#084298}
-nav ul{list-style:none}
-nav li{border-bottom:1px solid rgba(255,255,255,.15)}
-nav a{
-  color:#fff;
-  padding:14px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  text-decoration:none;
-  cursor:pointer;
-}
-nav a:hover{background:#0d6efd}
-
-/* SUBMENU SLIDE */
-.submenu{
-  background:#0b5ed7;
-  overflow:hidden;
-  max-height:0;
-  transition:max-height .35s ease;
-}
-.submenu a{
-  padding-left:32px;
-  font-size:14px;
-}
-
-/* OPEN STATE */
-.has-sub.open .submenu{
-  max-height:500px; /* cukup besar utk isi submenu */
-}
-
-/* ARROW ROTATE */
-.arrow{
-  transition:transform .3s;
-}
-.has-sub.open .arrow{
-  transform:rotate(180deg);
-}
-
-/* CONTENT */
-.container{padding:20px}
-.hero,.card{background:#fff;padding:20px;border-radius:8px;margin-bottom:20px}
-section{display:none}
-section.active{display:block}
-
-footer{background:#084298;color:#fff;text-align:center;padding:15px}
-</style>
+<meta name="description" content="Pendaftaran Peserta Didik Baru SMKN 1 Praya Barat">
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <header>
-<h1>SMK Negeri 1 Praya Barat</h1>
-<p>Sekolah Menengah Kejuruan – Lombok Tengah</p>
+  <h1>PPDB Online</h1>
+  <p>SMK Negeri 1 Praya Barat</p>
 </header>
 
 <nav>
 <ul>
-
-<li><a onclick="showMenu('beranda')">Beranda</a></li>
-
-<li class="has-sub">
-  <a onclick="toggleSub(this)">
-    Profil <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li><a onclick="go('profil')">Profil Sekolah</a></li>
-    <li><a onclick="go('visi')">Visi & Misi</a></li>
-    <li><a onclick="go('sejarah')">Sejarah</a></li>
-    <li><a onclick="go('struktur')">Struktur Organisasi</a></li>
-  </ul>
-</li>
-
-<li class="has-sub">
-  <a onclick="toggleSub(this)">
-    Akademik <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li><a onclick="go('jurusan')">Jurusan</a></li>
-    <li><a onclick="go('guru')">Guru & Tendik</a></li>
-    <li><a onclick="go('fasilitas')">Fasilitas</a></li>
-  </ul>
-</li>
-
-<li class="has-sub">
-  <a onclick="toggleSub(this)">
-    Informasi <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li><a onclick="go('berita')">Berita</a></li>
-    <li><a onclick="go('pengumuman')">Pengumuman</a></li>
-  </ul>
-</li>
-
-<li><a onclick="showMenu('ppdb')">PPDB</a></li>
-<li><a onclick="showMenu('kontak')">Kontak</a></li>
-
+  <li><a href="index.html">Beranda</a></li>
+  <li><a href="ppdb.html" class="active">PPDB</a></li>
+  <li><a href="kontak.html">Kontak</a></li>
 </ul>
 </nav>
 
-<!-- CONTENT -->
-<section id="beranda" class="container active"><div class="hero"><h2>Beranda</h2></div></section>
-<section id="profil" class="container"><div class="card"><h2>Profil</h2></div></section>
-<section id="visi" class="container"><div class="card"><h2>Visi & Misi</h2></div></section>
-<section id="sejarah" class="container"><div class="card"><h2>Sejarah</h2></div></section>
-<section id="struktur" class="container"><div class="card"><h2>Struktur Organisasi</h2></div></section>
-<section id="jurusan" class="container"><div class="card"><h2>Jurusan</h2></div></section>
-<section id="guru" class="container"><div class="card"><h2>Guru & Tendik</h2></div></section>
-<section id="fasilitas" class="container"><div class="card"><h2>Fasilitas</h2></div></section>
-<section id="berita" class="container"><div class="card"><h2>Berita</h2></div></section>
-<section id="pengumuman" class="container"><div class="card"><h2>Pengumuman</h2></div></section>
-<section id="ppdb" class="container"><div class="card"><h2>PPDB</h2></div></section>
-<section id="kontak" class="container"><div class="card"><h2>Kontak</h2></div></section>
+<main class="container">
+<div class="card">
+<h2>Form Pendaftaran</h2>
+
+<form id="ppdbForm">
+
+<label>Nama Lengkap</label>
+<input type="text" name="nama" required>
+
+<label>NISN</label>
+<input type="number" name="nisn" required>
+
+<label>Tempat, Tanggal Lahir</label>
+<input type="text" name="ttl" required>
+
+<label>Asal Sekolah</label>
+<input type="text" name="asal" required>
+
+<label>Pilihan Jurusan</label>
+<select name="jurusan" required>
+  <option value="">-- Pilih Jurusan --</option>
+  <option>RPL</option>
+  <option>TKJ</option>
+  <option>AKL</option>
+  <option>OTKP</option>
+</select>
+
+<label>No. HP / WhatsApp</label>
+<input type="tel" name="hp" required>
+
+<button type="submit">Daftar</button>
+
+<p id="status"></p>
+</form>
+</div>
+</main>
 
 <footer>© 2026 SMKN 1 Praya Barat</footer>
 
-<script>
-function toggleSub(el){
-  const li = el.parentElement;
+<script src="js/ppdb.js"></script>
 
-  document.querySelectorAll(".has-sub").forEach(item=>{
-    if(item !== li){
-      item.classList.remove("open");
-    }
-  });
-
-  li.classList.toggle("open");
+<style>
+form label{display:block;margin-top:10px;font-weight:bold}
+form input, form select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:5px
 }
-
-function go(id){
-  showMenu(id);
-  document.querySelectorAll(".has-sub").forEach(item=>{
-    item.classList.remove("open");
-  });
+button{
+  margin-top:15px;
+  padding:12px;
+  width:100%;
+  background:#0b5ed7;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  font-size:16px;
+  cursor:pointer
 }
-
-function showMenu(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-</script>
+button:hover{background:#0d6efd}
+#status{margin-top:10px;font-weight:bold}
+</style>
 
 </body>
 </html>
