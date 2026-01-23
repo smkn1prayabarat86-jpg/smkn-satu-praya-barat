@@ -10,51 +10,36 @@
 body{background:#f5f7fa}
 header{background:#0b5ed7;color:#fff;padding:20px}
 
-/* NAV */
 nav{background:#084298}
 nav ul{list-style:none}
 nav li{border-bottom:1px solid rgba(255,255,255,.15)}
 nav a{
-  color:#fff;
-  padding:14px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  text-decoration:none;
-  cursor:pointer;
+  color:#fff;padding:14px 16px;
+  display:flex;justify-content:space-between;
+  text-decoration:none;cursor:pointer
 }
 nav a:hover{background:#0d6efd}
 
-/* SUBMENU SLIDE */
 .submenu{
   background:#0b5ed7;
-  overflow:hidden;
   max-height:0;
-  transition:max-height .35s ease;
+  overflow:hidden;
+  transition:max-height .3s ease;
 }
-.submenu a{
-  padding-left:32px;
-  font-size:14px;
-}
+.has-sub.open .submenu{max-height:400px}
+.arrow{transition:.3s}
+.has-sub.open .arrow{transform:rotate(180deg)}
 
-/* OPEN STATE */
-.has-sub.open .submenu{
-  max-height:500px; /* cukup besar utk isi submenu */
-}
-
-/* ARROW ROTATE */
-.arrow{
-  transition:transform .3s;
-}
-.has-sub.open .arrow{
-  transform:rotate(180deg);
-}
-
-/* CONTENT */
 .container{padding:20px}
 .hero,.card{background:#fff;padding:20px;border-radius:8px;margin-bottom:20px}
 section{display:none}
 section.active{display:block}
+
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ccc;padding:6px;text-align:left}
+
+button{padding:8px 12px;background:#0b5ed7;color:#fff;border:none;border-radius:4px;cursor:pointer}
+button:hover{opacity:.9}
 
 footer{background:#084298;color:#fff;text-align:center;padding:15px}
 </style>
@@ -63,94 +48,209 @@ footer{background:#084298;color:#fff;text-align:center;padding:15px}
 <body>
 
 <header>
-<h1>SMK Negeri 1 Praya Barat</h1>
-<p>Sekolah Menengah Kejuruan – Lombok Tengah</p>
+<h1>SMKN 1 Praya Barat</h1>
+<p>Website Resmi Sekolah</p>
 </header>
 
 <nav>
 <ul>
-
 <li><a onclick="showMenu('beranda')">Beranda</a></li>
 
 <li class="has-sub">
-  <a onclick="toggleSub(this)">
-    Profil <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li><a onclick="go('profil')">Profil Sekolah</a></li>
-    <li><a onclick="go('visi')">Visi & Misi</a></li>
-    <li><a onclick="go('sejarah')">Sejarah</a></li>
-    <li><a onclick="go('struktur')">Struktur Organisasi</a></li>
-  </ul>
-</li>
-
-<li class="has-sub">
-  <a onclick="toggleSub(this)">
-    Akademik <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li><a onclick="go('jurusan')">Jurusan</a></li>
-    <li><a onclick="go('guru')">Guru & Tendik</a></li>
-    <li><a onclick="go('fasilitas')">Fasilitas</a></li>
-  </ul>
-</li>
-
-<li class="has-sub">
-  <a onclick="toggleSub(this)">
-    Informasi <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li><a onclick="go('berita')">Berita</a></li>
-    <li><a onclick="go('pengumuman')">Pengumuman</a></li>
-  </ul>
+<a onclick="toggleSub(this)">Profil <span class="arrow">▾</span></a>
+<ul class="submenu">
+<li><a onclick="go('profil')">Profil Sekolah</a></li>
+<li><a onclick="go('visi')">Visi & Misi</a></li>
+</ul>
 </li>
 
 <li><a onclick="showMenu('ppdb')">PPDB</a></li>
-<li><a onclick="showMenu('kontak')">Kontak</a></li>
 
+<!-- MENU ADMIN TERSEMBUNYI -->
+<li id="adminMenu" style="display:none">
+<a onclick="showMenu('admin')">🔒 Admin</a>
+</li>
 </ul>
 </nav>
 
-<!-- CONTENT -->
-<section id="beranda" class="container active"><div class="hero"><h2>Beranda</h2></div></section>
-<section id="profil" class="container"><div class="card"><h2>Profil</h2></div></section>
+<!-- ====== HALAMAN ====== -->
+<section id="beranda" class="container active">
+<div class="hero"><h2>Selamat Datang</h2></div>
+</section>
+
+<section id="profil" class="container"><div class="card"><h2>Profil Sekolah</h2></div></section>
 <section id="visi" class="container"><div class="card"><h2>Visi & Misi</h2></div></section>
-<section id="sejarah" class="container"><div class="card"><h2>Sejarah</h2></div></section>
-<section id="struktur" class="container"><div class="card"><h2>Struktur Organisasi</h2></div></section>
-<section id="jurusan" class="container"><div class="card"><h2>Jurusan</h2></div></section>
-<section id="guru" class="container"><div class="card"><h2>Guru & Tendik</h2></div></section>
-<section id="fasilitas" class="container"><div class="card"><h2>Fasilitas</h2></div></section>
-<section id="berita" class="container"><div class="card"><h2>Berita</h2></div></section>
-<section id="pengumuman" class="container"><div class="card"><h2>Pengumuman</h2></div></section>
-<section id="ppdb" class="container"><div class="card"><h2>PPDB</h2></div></section>
-<section id="kontak" class="container"><div class="card"><h2>Kontak</h2></div></section>
 
-<footer>© 2026 SMKN 1 Praya Barat</footer>
+<!-- PPDB SISWA -->
+<section id="ppdb" class="container">
+<div class="card">
+<h2>PPDB Online</h2>
+<form onsubmit="daftarPPDB(event)">
+<input id="nama" placeholder="Nama Lengkap" required>
+<input id="nisn" placeholder="NISN" required>
+<input id="asal" placeholder="Asal Sekolah" required>
+<select id="jurusan" required>
+<option value="">Pilih Jurusan</option>
+<option>DKV</option>
+<option>Perhotelan</option>
+<option>Tata Boga</option>
+</select>
+<button>Daftar</button>
+</form>
+<div id="hasil"></div>
+</div>
+</section>
 
+<!-- ===== ADMIN ===== -->
+<section id="admin" class="container">
+
+<!-- LOGIN -->
+<div class="card" id="loginBox">
+<h2>🔐 Login Admin</h2>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<div id="loginInfo"></div>
+</div>
+
+<!-- PANEL -->
+<div class="card" id="panelBox" style="display:none">
+<h2>📋 Panel Admin PPDB</h2>
+<button onclick="logout()">Logout</button>
+<br><br>
+
+<button onclick="exportExcel()">⬇ Export Excel</button>
+<br><br>
+
+<table>
+<thead>
+<tr>
+<th>Nama</th>
+<th>NISN</th>
+<th>Asal</th>
+<th>Jurusan</th>
+<th>Status</th>
+<th>Aksi</th>
+</tr>
+</thead>
+<tbody id="ppdbList"></tbody>
+</table>
+</div>
+
+</section>
+
+<footer id="secret">© 2026 SMKN 1 Praya Barat</footer>
+
+<!-- XLSX -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- ===== FIREBASE ===== -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } 
+from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
+from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+const firebaseConfig = {
+ apiKey: "API_KEY",
+ authDomain: "PROJECT.firebaseapp.com",
+ projectId: "PROJECT"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+/* PPDB SISWA */
+window.daftarPPDB = async e=>{
+ e.preventDefault();
+ await addDoc(collection(db,"ppdb"),{
+  nama:nama.value,
+  nisn:nisn.value,
+  asal:asal.value,
+  jurusan:jurusan.value,
+  status:"Pending",
+  waktu:new Date()
+ });
+ hasil.innerHTML="✅ Pendaftaran berhasil";
+};
+
+/* LOGIN ADMIN */
+window.login = async ()=>{
+ try{
+  await signInWithEmailAndPassword(auth,email.value,password.value);
+ }catch{
+  loginInfo.innerHTML="❌ Login gagal";
+ }
+};
+
+window.logout = async ()=>{ await signOut(auth); };
+
+/* AUTH */
+onAuthStateChanged(auth,user=>{
+ if(user){
+  loginBox.style.display="none";
+  panelBox.style.display="block";
+  loadPPDB();
+ }else{
+  loginBox.style.display="block";
+  panelBox.style.display="none";
+ }
+});
+
+/* LOAD PPDB */
+window.loadPPDB = async ()=>{
+ ppdbList.innerHTML="";
+ const snap = await getDocs(collection(db,"ppdb"));
+ snap.forEach(d=>{
+  const x=d.data();
+  ppdbList.innerHTML+=`
+  <tr>
+   <td>${x.nama}</td>
+   <td>${x.nisn}</td>
+   <td>${x.asal}</td>
+   <td>${x.jurusan}</td>
+   <td>${x.status}</td>
+   <td>
+    <button onclick="verifikasi('${d.id}','Diterima')">✔</button>
+    <button onclick="verifikasi('${d.id}','Ditolak')">✖</button>
+   </td>
+  </tr>`;
+ });
+};
+
+window.verifikasi = async (id,status)=>{
+ await updateDoc(doc(db,"ppdb",id),{status});
+ loadPPDB();
+};
+
+/* EXPORT EXCEL */
+window.exportExcel = async ()=>{
+ const snap = await getDocs(collection(db,"ppdb"));
+ const data=[];
+ snap.forEach(d=>data.push(d.data()));
+ const ws=XLSX.utils.json_to_sheet(data);
+ const wb=XLSX.utils.book_new();
+ XLSX.utils.book_append_sheet(wb,ws,"PPDB");
+ XLSX.writeFile(wb,"Data_PPDB_SMKN1.xlsx");
+};
+</script>
+
+<!-- MENU JS -->
 <script>
 function toggleSub(el){
-  const li = el.parentElement;
-
-  document.querySelectorAll(".has-sub").forEach(item=>{
-    if(item !== li){
-      item.classList.remove("open");
-    }
-  });
-
-  li.classList.toggle("open");
+ const li=el.parentElement;
+ document.querySelectorAll(".has-sub").forEach(x=>x!==li&&x.classList.remove("open"));
+ li.classList.toggle("open");
 }
-
-function go(id){
-  showMenu(id);
-  document.querySelectorAll(".has-sub").forEach(item=>{
-    item.classList.remove("open");
-  });
-}
-
 function showMenu(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
 }
+function go(id){showMenu(id);}
+let c=0;
+secret.onclick=()=>{if(++c==5)adminMenu.style.display="block";setTimeout(()=>c=0,1200);}
 </script>
 
 </body>
